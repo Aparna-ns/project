@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Users Table</title>
+    </head>
+    <body>
+        <form  align ="center" action="{% url 'addusers' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <label for="uname">Username</label><br><br>
+                <input type="text" name="uname"><br><br>
+                <label for="uemail">Email</label><br><br>
+                <input type="email" name="uemail"><br><br>
+                <label for="housename">House Name</label><br><br>
+                <input type="text" name="housename"><br><br>
+                <label for="town">Town</label><br><br>
+                <input type="text" name="town"><br><br>
+                <label for="pin">PIN</label><br><br>
+                <input type="number" name="pin"><br><br>
+                <label for="uphone">Phone</label><br><br>
+                <input type="bigint" name="uphone"><br><br>
+                <label for="upassword">Password</label><br><br>
+                <input type="password" name="upassword"><br><br>
+                <button type="submit">Register</button><br><br>
+            </fieldset>
+        </form>
+    </body>
+</html>

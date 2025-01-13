@@ -1,0 +1,45 @@
+
+<html>
+<head>
+    <title>Product Table</title>
+</head>
+<body>
+    <form align="center" action="{% url 'product_add' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Product Registration</legend>
+            
+            <label for="pname">Product Name:</label><br><br>
+            <input type="text" id="pname" name="pname"><br><br>
+            
+            <label for="psize">Size:</label><br><br>
+            <input type="checkbox" name="checkbox" id="c1" value="XS" /> XS
+            <input type="checkbox" name="checkbox" id="c2" value="S" /> S
+            <input type="checkbox" name="checkbox" id="c3" value="M" /> M
+            <input type="checkbox" name="checkbox" id="c4" value="L" /> L
+            <input type="checkbox" name="checkbox" id="c5" value="XL" /> XL
+            <input type="checkbox" name="checkbox" id="c6" value="XXL" /> XXL<br><br>
+            
+            <label for="category">Category:</label><br><br>
+            <select name="category" required>
+                <option value="WINTER WEAR">Winter Wear</option>
+                <option value="SWEATSHIRTS">Sweatshirts</option>
+                <option value="KURTA SETS">Kurta Sets</option>
+                <option value="TOPS">Tops</option>
+            </select><br><br>
+
+            <label for="pamount">Amount:</label><br><br>
+            <input type="number" id="pamount" name="pamount"><br><br>
+            
+            <label for="pphoto">Product Photo:</label><br><br>
+            <input type="file" id="pphoto" name="pphoto"><br><br>
+
+            <label for="sizephoto">Size Photo:</label><br><br>
+            <input type="file" id="sizephoto" name="sizephoto"><br><br>
+            
+            <button type="submit">Add Product</button><br><br>
+            <a href="/productview">View Products</a>
+        </fieldset>
+    </form>
+</body>
+</html>

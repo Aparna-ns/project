@@ -1,0 +1,83 @@
+{% extends 'aromaproview.html' %}
+{% block body %}
+<html>
+    <head>
+        <title>VIEW PAGE</title>
+        <style>
+            table {
+                width: 80%;  /* Adjust the table width here */
+                margin: 0 auto;  /* Centers the table horizontally */
+                border-collapse: collapse; /* Removes spacing between borders */
+            }
+
+            th, td {
+                padding: 10px;  /* Adds padding for readability */
+                text-align: center;  /* Centers text */
+            }
+
+            th {
+                background-color: #f2f2f2;  /* Optional: Adds a background color to header */
+            }
+
+            td img {
+                width: 50px; /* Adjust the image size for the first image (photo) */
+                height: auto;
+            }
+
+            td a {
+                text-decoration: none;
+                color: blue; /* Style for links */
+            }
+
+            td.sizephoto img {
+                width: 100px;  /* Increase size for the sizephoto */
+                height: auto;
+                max-width: 100%;  /* Ensures the image fits within the column */
+            }
+
+            /* Optionally, specify a minimum width for the sizephoto column */
+            td.sizephoto {
+                width: 120px;  /* Adjust the column width */
+                vertical-align: middle;  /* Ensure images are vertically centered */
+            }
+
+        </style>
+    </head>
+    <body>
+        <table class="table">
+            <!-- <caption>Product Details</caption> -->
+            <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Photo</th>
+                <th>SizePhoto</th>
+                <th></th> <!-- Added a column for actions (Delete, Update) -->
+                <th></th>
+            </tr>
+            {% for pt in products %}
+            <tr>
+                <td style="font-size: 20px;">{{ pt.pname }}</td>
+                <td style="font-size: 20px;">{{ pt.psize }}</td>
+                <td style="font-size: 20px;">{{ pt.category }}</td>
+                <td style="font-size: 20px;">{{ pt.pamount }}</td>
+                <td><img src="{{ pt.pphoto.url }}" alt="Photo of {{ pt.pphoto }}" /></td>
+                <td class="sizephoto">
+                    {% if pt.sizephoto %}
+                        <img src="{{ pt.sizephoto.url }}" alt="Size photo of {{ pt.sizephoto }}" />
+                    {% else %}
+                        <p>No size photo available</p>
+                    {% endif %}
+                </td>
+                <!-- <td><a href="{% url 'product_delete' pt.id %}" style="color: red;">Delete</a></td> -->
+
+                <td><a href="{% url 'product_delete' pt.id %}" style="color: red;" class="fas fa-trash delete-btn>Delete"></a></td>
+                <td><a href="{% url 'product_update' pt.id %}" style="color: green;" class="fas fa-pen edit-btn"></a></td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

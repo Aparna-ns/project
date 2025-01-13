@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Staff Registration</title>
+    </head>
+    <body>
+        <form align="center" action="{% url 'addstaff' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Staff Registration</legend>
+                
+                <label for="sname">Username:</label><br><br>
+                <input type="text" id="sname" name="sname" required="" pattern="[a-z A-Z]{3,30}"><br><br>
+                
+                <label for="semail">Email:</label><br><br>
+                <input type="email" id="semail" name="semail" required="" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"><br><br>
+                
+                <label for="address">Address:</label><br><br>
+                <input type="text" id="address" name="address" required=""><br><br>
+                
+                <label for="sphone">Phone:</label><br><br>
+                <input type="text" id="sphone" name="sphone" required="" pattern="[6789][0-9]{9}"><br><br>
+                
+                <label for="spassword">Password:</label><br><br>
+                <input type="password" id="spassword" name="spassword" required=""><br><br>
+                
+                <label for="sphoto">Photo:</label><br><br>
+                <input type="file" id="sphoto" name="sphoto" required=""><br><br>
+                
+                <button type="submit">Register</button><br><br>
+            </fieldset>
+        </form>
+    </body>
+</html>

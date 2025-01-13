@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aroma Shop - Checkout</title>
+	<link rel="icon" href="{% static 'img/Fevicon.png' %}" type="image/png">
+
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/nice-select/nice-select.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/nouislider/nouislider.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <!--================ Start Header Menu Area =================-->
+	<header class="header_area">
+    <div class="main_menu">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          {% if request.session.login_id%}
+          <a class="navbar-brand logo_h" href="/aromauserpage"><img src="img/logo.png" alt=""></a>
+          {% else %}
+          <a class="navbar-brand logo_h" href="{% url 'index' %}"><img src="img/logo.png" alt=""></a>
+          {% endif %}
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+              {% if request.session.login_id%}
+              <li class="nav-item"><a class="nav-link" href="/aromauserpage">Home</a></li>
+              {% else %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+              {% endif %}
+
+              <!-- <li class="nav-item active submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Shop</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
+                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
+                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
+                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
+                </ul>
+							</li> -->
+              <!-- <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Blog</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
+                </ul>
+							</li> -->
+							<!-- <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Pages</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
+                </ul>
+              </li> -->
+              <!-- <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li> -->
+              {% if request.session.login_id%}
+							<li class="nav-item"><a class="nav-link" href="/cartview">Cart</a></li>
+							  <li class="nav-item"><a class="nav-link" href="/wishlist">Wishlist</a></li>
+			  {% endif %}
+						  </ul>
+			  
+						  <ul class="nav-shop">
+							<!-- <li class="nav-item"><button><i class="ti-search"></i></button></li> -->
+              {% if request.session.login_id%}
+              <li class="nav-item"><button><a href="/cartview"><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></a></button> </li>
+              {% endif %}
+						   {% if request.session.login_id%}
+			  
+						   <li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							  aria-expanded="false">{{request.session.username}}</a>
+							<ul class="dropdown-menu">
+							 
+							  <li class="nav-item"><a class="nav-link" href="{% url 'history' %}">History</a></li>
+							  <li class="nav-item"><a class="nav-link" href="{% url 'userlogout' %}">LogOut</a></li>
+							  
+							</ul>
+						  </li>
+						   {% else %}
+							<li class="nav-item"><a class="button button-header" href="/loginpage">Login</a></li>
+						   {% endif %}
+						  </ul>
+						</div>
+					  </div>
+					</nav>
+				  </div>
+				</header>
+	<!--================ End Header Menu Area =================-->
+
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Product Checkout</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+  
+  
+  <!--================Checkout Area =================-->
+  <section class="checkout_area section-margin--small">
+    <div class="container">
+        
+        
+        <div class="billing_details">
+				<div class="row">
+					<div class="col-lg-8">
+						<h3>Delivery Details</h3>
+							<form class="row contact_form" action="{% url 'order' %}" method="post" >
+							<div class="col-md-6 form-group p_star">
+								<input type="text" class="form-control" id="first" name="fname" placeholder="First Name" required="" pattern="[a-z A-Z]{3,30}">
+								<!-- <span class="placeholder" placeholder="First name"></span> -->
+							</div>
+							<div class="col-md-6 form-group p_star">
+								<input type="text" class="form-control" id="last" name="lname"  placeholder="Last Name" required="" pattern="[a-z A-Z]{1,30}">
+								<!-- <span class="placeholder" placeholder="Last name"></span> -->
+							</div>
+							<div class="col-md-6 form-group p_star">
+								<input type="text" class="form-control" id="phone" name="pnumber" placeholder="Phone Number" required="" pattern="[6789][0-9]{9}">
+								<!-- <span class="placeholder" data-placeholder="Phone number"></span> -->
+							</div>
+							<div class="col-md-6 form-group p_star">
+								<input type="text" class="form-control" id="number" name="pin" placeholder="Pin Code" required="">
+								<!-- <span class="placeholder" data-placeholder="Phone number"></span> -->
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="company" name="address" placeholder="Address(House No,Building,Street,Area)" required="">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="company" name="locality" placeholder="Locality/Town" required="">
+							</div>
+							<div class="col-md-6 form-group p_star">
+								<input type="text" class="form-control" id="number" name="district" placeholder="District" required="">
+								<!-- <span class="placeholder" data-placeholder="Phone number"></span> -->
+							</div>
+							<div class="col-md-6 form-group p_star">
+								<input type="text" class="form-control" id="number" name="state" placeholder="State" required="">
+								<!-- <span class="placeholder" data-placeholder="Phone number"></span> -->
+							</div>
+								<textarea class="form-control" name="message" id="message" rows="2" placeholder="Land mark" required=""  style="width: 750px;margin-left: 10px;"></textarea>
+							<!-- </div> -->
+						<!-- </form> -->
+					<!-- </div> -->
+					<div class="col-lg-4" >
+						<div class="order_box" style="width: 750px;margin-top: 10px;margin-left: -10px;">
+							<h2>Your Order</h2>
+							<!-- <form action="{% url 'order' %}" method="post"> -->
+								{% csrf_token %}
+							<ul class="list">
+								<li><a href="#"><h4>Product <span>Total</span></h4></a></li>
+								{% for i  in products %}
+								<li><a href="#">{{i.productname}} <span class="middle">X {{i.quantity}}</span> <span class="last">{{i.total}}</span></a></li>
+							   {% endfor %}
+							</ul>
+							<ul class="list list_2">
+								<li><a href="#">Total <span>{{subtotal}}</span></a></li>
+							   
+							 
+							</ul>
+						   
+									<input type="radio"   name="selector" value="Cash on Delivery" required="">
+									Cash on Delivery
+								  
+							
+							   
+						
+									<input type="radio" name="selector"  value="Online Payment"required="">
+									Online Payment
+								   
+								
+							
+							<div class="text-center">
+							  <button class="button button-paypal">BUY</button>
+							</div>
+							</div>
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+			 
+                       
+                        <div class="col-md-12 form-group p_star">
+                           
+          
+                <!-- <div class="col-lg-4">
+                    <div class="order_box" style="width: 1000px;">
+                        <h2>Your Order</h2>
+                        <form action="{% url 'order' %}" method="post">
+                            {% csrf_token %}
+                        <ul class="list">
+                            <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
+                            {% for i  in products %}
+                            <li><a href="#">{{i.productname}} <span class="middle">X {{i.quantity}}</span> <span class="last">{{i.total}}</span></a></li>
+                           {% endfor %}
+                        </ul>
+                        <ul class="list list_2">
+                            <li><a href="#">Total <span>{{subtotal}}</span></a></li>
+                           
+                         
+                        </ul>
+                       
+                                <input type="radio"   name="selector" value="Cash on Delivery" required="">
+                                Cash on Delivery
+                              
+                        
+                           
+                    
+                                <input type="radio" name="selector"  value="Online Payment"required="">
+                                Online Payment
+                               
+                            
+                        
+                        <div class="text-center">
+                          <button class="button button-paypal">BUY</button>
+                        </div>
+                    </form>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+
+
+
+  <!--================ Start footer Area  =================-->	
+	<footer>
+		<div class="footer-area footer-only">
+			<div class="container">
+				<div class="row section_gap">
+					<div class="col-lg-3 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets ">
+							<h4 class="footer_title large_title">Our Mission</h4>
+							<p>
+								So seed seed green that winged cattle in. Gathering thing made fly you're no 
+								divided deep moved us lan Gathering thing us land years living.
+							</p>
+							<p>
+								So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
+							</p>
+						</div>
+					</div>
+					<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title">Quick Links</h4>
+							<ul class="list">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Shop</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Product</a></li>
+								<li><a href="#">Brand</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-6 col-sm-6">
+						<div class="single-footer-widget instafeed">
+							<h4 class="footer_title">Gallery</h4>
+							<ul class="list instafeed d-flex flex-wrap">
+								<li><img src="{% static 'img/gallery/r1.jpg' %}" alt=""></li>
+								<li><img src="{% static 'img/gallery/r2.jpg '%}" alt=""></li>
+								<li><img src="{% static 'img/gallery/r5.jpg' %}" alt=""></li>
+								<li><img src="{% static 'img/gallery/r7.jpg' %}" alt=""></li>
+								<li><img src="{% static 'img/gallery/r8.jpg' %}" alt=""></li>
+							</ul>
+						</div>
+					</div>
+					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title">Contact Us</h4>
+							<div class="ml-40">
+								<p class="sm-head">
+									<span class="fa fa-location-arrow"></span>
+									Head Office
+								</p>
+								<p>123, Main Street, Your City</p>
+	
+								<p class="sm-head">
+									<span class="fa fa-phone"></span>
+									Phone Number
+								</p>
+								<p>
+									+123 456 7890 <br>
+									+123 456 7890
+								</p>
+	
+								<p class="sm-head">
+									<span class="fa fa-envelope"></span>
+									Email
+								</p>
+								<p>
+									free@infoexample.com <br>
+									www.infoexample.com
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row d-flex">
+					<p class="col-lg-12 footer-text text-center">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--================ End footer Area  =================-->
+
+
+
+  <script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendors/skrollr.min.js' %}"></script>
+  <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendors/nice-select/jquery.nice-select.min.js '%}"></script>
+  <script src="{% static 'vendors/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{% static 'vendors/mail-script.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

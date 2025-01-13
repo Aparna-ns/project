@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>product list</title>
+    </head>
+    <body>
+        <form action="{% url 'product_update' product.id %}" method="post">
+            {% csrf_token %}
+            name:<input type="text" name="pname" value="{{product.pname}}">
+            <label for="psize">Size:</label><br><br>
+            <input type="checkbox" name="checkbox" id="c1" value="XS" /> XS
+            <input type="checkbox" name="checkbox" id="c2" value="S" /> S
+            <input type="checkbox" name="checkbox" id="c3" value="M" /> M
+            <input type="checkbox" name="checkbox" id="c4" value="L" /> L
+            <input type="checkbox" name="checkbox" id="c5" value="XL" /> XL
+            <input type="checkbox" name="checkbox" id="c6" value="XXL" /> XXL<br><br>
+            
+            <label for="category">Category:</label><br><br>
+            <select name="category" required>
+                <option value="WINTER WEAR">Winter Wear</option>
+                <option value="SWEATSHIRTS">Sweatshirts</option>
+                <option value="KURTA SETS">Kurta Sets</option>
+                <option value="TOPS">Tops</option>
+            </select><br><br>
+            
+            
+            pamount:<input type="number" name="pamount" value="{{product.pamount}}">
+            
+            pphoto<input type="file" name="pro_photo"   value="{{product.pphoto}}">
+            sizephoto<input type="file" name="size_photo"   value="{{product.sizephoto}}">
+           
+            <input type="submit" value="update">
+
+            
+        
+        </form>
+    </body>
+</html>
